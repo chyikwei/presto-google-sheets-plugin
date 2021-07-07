@@ -45,7 +45,7 @@ public class TestSheetsClient
         closeable = MockitoAnnotations.openMocks(this);
 
         when(apiClient.readDriveFiles(getTestFolderId())).thenReturn(folderFiles);
-        when(apiClient.readSheets("test_sheets_id1", "$1:$10000")).thenReturn(table1Data);
+        when(apiClient.readSheets("test_sheets_id1", 10001)).thenReturn(table1Data);
 
         SheetsConfig config = new SheetsConfig()
                 .setCredentialsFilePath(getTestCredentialsPath())

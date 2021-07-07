@@ -21,9 +21,9 @@ import java.util.Set;
 public class SheetsClient
 {
     private static final Logger log = Logger.get(SheetsClient.class);
-    private static final String defaultSheetsRange = "$1:$10000";
 
     private final String folderId;
+    private final int sheetsMaxDataRow;
     private final SheetsApiClient sheetsApiClient;
 
     private Map<String, String> tableSheetIdMap = ImmutableMap.of();
@@ -33,6 +33,7 @@ public class SheetsClient
     public SheetsClient(SheetsConfig config, SheetsApiClient sheetsApiClient)
     {
         this.folderId = config.getDriveFolderId();
+        this.sheetsMaxDataRow = config.getSheetsDataMaxRow();
         this.sheetsApiClient = sheetsApiClient;
     }
 
@@ -76,8 +77,9 @@ public class SheetsClient
             log.debug("not sheetsId for table {}", tableName);
             return Optional.empty();
         }
-
-        List<List<Object>> sheetData = sheetsApiClient.readSheets(sheetsId, defaultSheetsRange);
+        //TODO
+        log.info("call sheets client with maxRow: " + (sheetsMaxDataRow + 1));
+        List<List<Object>> sheetData = sheetsApiClient.readSheets(sheetsId, sheetsMaxDataRow + 1);
         if (sheetData == null || sheetData.size() == 0) {
             return Optional.empty();
         }

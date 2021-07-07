@@ -23,6 +23,7 @@ class TestSheetsConfig
                 .setCredentialsFilePath(null)
                 .setDriveFolderId(null)
                 .setSheetsDataMaxCacheSize(1000)
+                .setSheetsDataMaxRow(10000)
                 .setSheetsDataExpireAfterWrite(new Duration(5, TimeUnit.MINUTES)));
     }
 
@@ -36,6 +37,7 @@ class TestSheetsConfig
                 .put("credentials-path", credentialsFile.toString())
                 .put("google-drive-folder-id", "test_folder_id")
                 .put("sheets-data-max-cache-size", "2000")
+                .put("sheets-data-max-row", "100")
                 .put("sheets-data-expire-after-write", "10m")
                 .build();
 
@@ -43,6 +45,7 @@ class TestSheetsConfig
                 .setCredentialsFilePath(credentialsFile.toString())
                 .setDriveFolderId("test_folder_id")
                 .setSheetsDataMaxCacheSize(2000)
+                .setSheetsDataMaxRow(100)
                 .setSheetsDataExpireAfterWrite(new Duration(10, TimeUnit.MINUTES));
 
         assertFullMapping(properties, expected);

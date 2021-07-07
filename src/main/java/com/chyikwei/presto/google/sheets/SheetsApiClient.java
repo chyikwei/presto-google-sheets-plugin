@@ -91,6 +91,12 @@ public class SheetsApiClient
         }
     }
 
+    public List<List<Object>> readSheets(String sheetsId, int maxRow)
+    {
+        String range = String.format("$1:${}", maxRow);
+        return readSheets(sheetsId, range);
+    }
+
     public List<List<Object>> readSheets(String sheetsId, String range)
     {
         try {
