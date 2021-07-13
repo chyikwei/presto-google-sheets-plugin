@@ -15,6 +15,7 @@ public class SheetsConfig
     private String credentialsFilePath;
     private String driveFolderId;
     private int sheetsDataMaxCacheSize = 1000;
+    private int sheetsDataMaxRow = 10000;
     private Duration sheetsDataExpireAfterWrite = new Duration(5, TimeUnit.MINUTES);
 
     @NotNull
@@ -49,6 +50,20 @@ public class SheetsConfig
     public int getSheetsDataMaxCacheSize()
     {
         return sheetsDataMaxCacheSize;
+    }
+
+    @Min(1)
+    public int getSheetsDataMaxRow()
+    {
+        return sheetsDataMaxRow;
+    }
+
+    @Config("sheets-data-max-row")
+    @ConfigDescription("Sheet data max row count. First row (column name) is not included")
+    public SheetsConfig setSheetsDataMaxRow(int sheetsDataMaxRow)
+    {
+        this.sheetsDataMaxRow = sheetsDataMaxRow;
+        return this;
     }
 
     @Config("sheets-data-max-cache-size")
